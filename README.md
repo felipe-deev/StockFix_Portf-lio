@@ -7,7 +7,7 @@ O portfólio explica o fluxo de compras, estoque e vendas, apresenta uma prévia
 ## Como abrir
 
 1. Baixe o projeto pelo botão **Code → Download ZIP** e extraia o arquivo.
-2. Abra **Portfolio.html** no navegador.
+2. Abra **index.html** no navegador (o arquivo antigo **Portfolio.html** redireciona para ele).
 3. Mantenha as pastas **css**, **js** e **img** junto do HTML.
 
 Não é necessário instalar dependências, configurar banco de dados ou iniciar um servidor. As fontes são carregadas pelo Google Fonts; sem internet, o navegador utiliza fontes do sistema.
@@ -40,7 +40,8 @@ Ao rolar a página, textos e cartões se reconstroem por partículas. Os efeitos
 ## Estrutura do projeto
 
 ```text
-Portfolio.html   Conteúdo, navegação e contatos
+index.html       Conteúdo, navegação e contatos
+Portfolio.html   Redirecionamento de compatibilidade
 css/style.css    Layout responsivo, temas e estilos
 js/main.js       Demonstração, troca de tema e partículas
 img/icon.svg    Ícone do projeto
@@ -54,4 +55,21 @@ HTML, CSS e JavaScript, sem etapa de build. As tecnologias do sistema StockFix s
 
 ## Status
 
-Portfólio de um projeto em desenvolvimento. A prévia e a demonstração usam dados de exemplo; os recursos planejados são identificados separadamente. O envio deste código ao GitHub não publica automaticamente um site acessível pelo navegador.
+Portfólio de um projeto em desenvolvimento. A prévia e a demonstração usam dados de exemplo; os recursos planejados são identificados separadamente. A publicação pelo GitHub Pages utiliza a branch main e a pasta raiz.
+
+
+## Site publicado e como atualizar
+
+Acesse: https://felipe-deev.github.io/StockFix_Portf-lio/
+
+O GitHub Pages publica o conteúdo da branch **main**, na pasta **/ (root)**.
+A página inicial é **index.html**; o arquivo **.nojekyll** mantém a publicação como HTML/CSS/JavaScript estáticos.
+
+Para atualizar, edite **index.html**, **css/style.css** ou **js/main.js**, faça um commit e envie para a branch **main**. O GitHub publica a nova versão automaticamente; acompanhe a execução na aba **Actions**.
+
+Para conferir ou refazer a configuração pelo navegador:
+
+1. No repositório, abra **Settings → Pages**.
+2. Em **Build and deployment**, selecione **Deploy from a branch**.
+3. Escolha a branch **main** e a pasta **/ (root)** e clique em **Save**.
+4. Aguarde a publicação e abra o endereço exibido pelo GitHub.
