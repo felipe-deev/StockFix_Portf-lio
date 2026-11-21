@@ -1,0 +1,599 @@
+/* =========================================================
+   StockFix · Portfólio
+   Identidade: desenho técnico de engenharia em verde.
+   ========================================================= */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+  --blueprint: #0b3a2f;      /* fundo técnico escuro */
+  --blueprint-2: #0f4a3c;
+  --green: #0f6e56;          /* cor da marca */
+  --mint: #bdf5d6;           /* traço sobre o fundo escuro */
+  --paper: #f2f6f3;          /* papel de fundo */
+  --surface: #ffffff;
+  --ink: #12261f;
+  --muted: #4f665d;
+  --line: #d3e0d9;
+  --dim: #e3a43a;            /* cor das cotas e do foco */
+
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-tech: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+
+  --wrap: 1160px;
+  --gutter: 32px;
+  --radius-lg: 18px;
+  --radius-sm: 8px;
+}
+
+/* ---------- 2. Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.65 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-stretch: 90%;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(30px, 3.6vw, 46px);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+p { margin: 0 0 18px; }
+
+a { color: inherit; }
+
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--dim);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.intro {
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 62ch;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 70ch;
+  margin-top: 24px;
+}
+
+/* ---------- 3. Botões ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--radius-sm);
+  background: var(--mint);
+  color: var(--blueprint);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  border: 1px solid var(--mint);
+  transition: background-color .15s, color .15s;
+}
+.button:hover { background: #d6fbe7; }
+
+.button-ghost {
+  background: transparent;
+  color: var(--mint);
+  border-color: rgba(189, 245, 214, .45);
+}
+.button-ghost:hover { background: rgba(189, 245, 214, .1); }
+
+.button-light {
+  background: #fff;
+  border-color: #fff;
+  color: var(--green);
+  white-space: nowrap;
+}
+
+/* ---------- 4. Cabeçalho ---------- */
+.site-header {
+  background: var(--blueprint);
+  color: #fff;
+  border-bottom: 1px solid rgba(189, 245, 214, .12);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 76px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.brand-name span { color: var(--mint); }
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--mint);
+  stroke-width: 2;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 15px;
+}
+.nav-links a { text-decoration: none; color: #d4e7de; }
+.nav-links a:hover { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
+
+.nav-cta {
+  padding: 7px 14px;
+  border: 1px solid rgba(189, 245, 214, .4);
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- 5. Hero (folha técnica) ---------- */
+.hero {
+  background-color: var(--blueprint);
+  background-image:
+    linear-gradient(rgba(189, 245, 214, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(189, 245, 214, .06) 1px, transparent 1px),
+    linear-gradient(rgba(189, 245, 214, .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(189, 245, 214, .03) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  color: #fff;
+  padding: 88px 0 96px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.kicker {
+  font-family: var(--font-tech);
+  font-size: 14px;
+  color: var(--mint);
+  margin-bottom: 22px;
+}
+
+h1 {
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 800;
+  font-stretch: 78%;
+  line-height: .98;
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+
+.lead {
+  color: #c9ddd4;
+  font-size: 20px;
+  max-width: 34ch;
+  margin-bottom: 34px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Desenho SVG */
+.drawing {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid rgba(189, 245, 214, .25);
+  border-radius: var(--radius-lg);
+  background: rgba(11, 58, 47, .7);
+}
+
+.drawing svg { display: block; width: 100%; height: auto; }
+
+.drawing .draw,
+.drawing .draw-line {
+  fill: none;
+  stroke: var(--mint);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+.drawing .thin { stroke-width: 1; stroke-dasharray: 4 4; opacity: .6; }
+.drawing .packs rect { fill: rgba(189, 245, 214, .06); }
+
+.drawing .dim line,
+.drawing .stroke-dim { stroke: var(--dim); stroke-width: 1; fill: none; }
+.drawing .fill-line { fill: var(--mint); }
+
+.drawing text { font-family: var(--font-tech); fill: #cfe8dc; }
+.drawing .label { font-size: 12px; }
+.drawing .big { font-family: var(--font-display); font-size: 58px; font-weight: 800; fill: #fff; }
+.drawing .center { text-anchor: middle; }
+.drawing .dim-text { fill: var(--dim); }
+
+.drawing figcaption {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(189, 245, 214, .25);
+  font-family: var(--font-tech);
+  font-size: 12px;
+  color: #9fbfb2;
+}
+
+/* Único movimento automático: o desenho se traça ao carregar */
+@media (prefers-reduced-motion: no-preference) {
+  .drawing .draw > *,
+  .drawing .draw-line {
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: trace 1.6s ease-out forwards;
+  }
+  .drawing .packs > * { animation-delay: .7s; }
+  .drawing .draw-line { animation-delay: .5s; }
+  .drawing .thin { animation: none; stroke-dashoffset: 0; stroke-dasharray: 4 4; }
+  .drawing text,
+  .drawing .dim {
+    opacity: 0;
+    animation: appear .6s ease-out 1.2s forwards;
+  }
+}
+
+@keyframes trace { to { stroke-dashoffset: 0; } }
+@keyframes appear { to { opacity: 1; } }
+
+/* ---------- 6. Seções ---------- */
+.section {
+  padding: 88px 0;
+  border-top: 1px solid var(--line);
+}
+.hero + .section { border-top: 0; }
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+
+/* Fluxo em 4 etapas (sequência real → numeração) */
+.flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+.flow li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 26px 64px;
+  margin: 0;
+}
+.flow li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--green);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--green);
+  background: var(--paper);
+}
+.flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  bottom: 0;
+  border-left: 1.5px dashed var(--line);
+}
+.flow h3 { margin-bottom: 6px; }
+.flow p { margin: 0; color: var(--muted); }
+
+/* ---------- 7. Simulação ---------- */
+.demo {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  background: var(--blueprint);
+  color: #fff;
+}
+
+.demo label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.slider-row input { flex: 1; accent-color: var(--mint); height: 28px; }
+.slider-row output {
+  min-width: 3ch;
+  font-family: var(--font-tech);
+  font-size: 18px;
+  color: var(--mint);
+  text-align: right;
+}
+
+.numbers {
+  display: flex;
+  gap: 40px;
+  margin: 30px 0 18px;
+}
+.numbers div { margin: 0; }
+.numbers dt { font-size: 14px; color: #b7cfc5; }
+.numbers dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  font-stretch: 80%;
+  line-height: 1.1;
+  color: var(--mint);
+  font-variant-numeric: tabular-nums;
+}
+
+.summary { color: #e4f1eb; }
+.demo .note { color: #9fbfb2; margin-top: 8px; }
+
+.demo-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.pack-grid span {
+  aspect-ratio: 2 / 1;
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(189, 245, 214, .3);
+  border-radius: 4px;
+  font-family: var(--font-tech);
+  font-size: 12px;
+  color: transparent;
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+.pack-grid span.on {
+  background: rgba(189, 245, 214, .14);
+  border: 1px solid var(--mint);
+  color: var(--mint);
+}
+
+.split-bar {
+  height: 12px;
+  border-radius: 99px;
+  background: rgba(189, 245, 214, .18);
+  overflow: hidden;
+}
+.split-bar span {
+  display: block;
+  height: 100%;
+  width: 40%;
+  background: var(--mint);
+  transition: width .2s;
+}
+
+.split-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #b7cfc5;
+}
+
+/* ---------- 8. Recursos ---------- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+.feature {
+  padding-top: 18px;
+  border-top: 3px solid var(--green);
+}
+.feature h3 { margin-bottom: 10px; }
+.feature p { color: var(--muted); font-size: 16px; margin: 0; }
+
+/* ---------- 9. Tecnologia ---------- */
+.stack {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 40px;
+  margin-top: 36px;
+}
+.stack article {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+.stack h3 { margin-bottom: 6px; }
+.stack p { margin: 0; color: var(--muted); font-size: 16px; }
+
+/* ---------- 10. Evolução ---------- */
+.status {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 36px;
+}
+.status-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+}
+.status-card h3 { margin: 14px 0 6px; }
+.status-card ul { margin: 0; padding-left: 20px; color: var(--muted); }
+.status-card li { margin: 8px 0; }
+
+.status-future {
+  background: transparent;
+  border-style: dashed;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: #dcf1e5;
+  color: #12533c;
+  font-size: 14px;
+  font-weight: 600;
+}
+.status-future .badge { background: #e7ecef; color: #425365; }
+
+/* ---------- 11. Fechamento ---------- */
+.closing-wrap { padding: 24px 0 64px; }
+
+.closing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  padding: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--green);
+  color: #fff;
+}
+.closing h2 { font-size: 36px; margin-bottom: 10px; }
+.closing p { margin: 0; max-width: 58ch; color: #d5eee2; }
+
+/* ---------- 12. Rodapé (carimbo técnico) ---------- */
+footer { padding-bottom: 40px; }
+
+.title-block {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.title-block th,
+.title-block td {
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  text-align: left;
+}
+.title-block th {
+  width: 1%;
+  white-space: nowrap;
+  font-family: var(--font-tech);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--muted);
+  background: #e9f0ec;
+}
+
+/* ---------- 13. Responsivo ---------- */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .lead { max-width: 46ch; }
+}
+
+@media (max-width: 760px) {
+  :root { --gutter: 20px; }
+
+  .nav { min-height: 64px; }
+  .nav-links { gap: 16px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+
+  .hero { padding: 48px 0 56px; }
+  .drawing { padding: 14px; }
+
+  .section { padding: 56px 0; }
+  .split,
+  .demo,
+  .status { grid-template-columns: 1fr; gap: 32px; }
+  .features,
+  .stack { grid-template-columns: 1fr; }
+  .features { gap: 24px; }
+
+  .demo { padding: 24px; }
+  .numbers { gap: 28px; }
+  .numbers dd { font-size: 40px; }
+
+  .closing { display: block; padding: 28px; }
+  .closing .button { margin-top: 22px; }
+
+  .title-block tr { display: grid; grid-template-columns: auto 1fr; }
+  .title-block th { width: auto; }
+}
+
+/* ---------- 14. Acessibilidade e impressão ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+
+@media print {
+  .site-header, .button, .slider-row input { display: none; }
+  .hero, .demo, .closing { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+  .lead, .summary, .closing p, .numbers dt, .demo .note { color: var(--muted); }
+  .drawing .draw, .drawing .draw-line { stroke: var(--green); }
+  .drawing text { fill: var(--ink); }
+  .numbers dd { color: var(--green); }
+  article, .drawing, .demo { break-inside: avoid; }
+}

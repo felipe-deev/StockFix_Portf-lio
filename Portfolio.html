@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StockFix — Portfólio do projeto</title>
+  <meta name="description" content="Conheça o StockFix: gestão de produtos, compras, estoque e vendas, com painel web e aplicativo móvel em desenvolvimento.">
+  <meta name="theme-color" content="#0b3a2f">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="StockFix, início">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <polygon points="16,3 27.3,9.5 27.3,22.5 16,29 4.7,22.5 4.7,9.5" />
+          <circle cx="16" cy="16" r="5" />
+        </svg>
+        <span class="brand-name">Stock<span>Fix</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#funcionamento">Como funciona</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#tecnologia">Tecnologia</a>
+        <a class="nav-cta" href="https://github.com/felipe-deev/StockFix" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="inicio">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <p class="kicker">ERP para pequenas empresas, em desenvolvimento</p>
+          <h1>Da caixa fechada à venda organizada.</h1>
+          <p class="lead">Um ERP que conecta compras, estoque e vendas de pequenas empresas, com controle por unidade, caixa e pacotinho.</p>
+          <div class="hero-actions">
+            <a class="button" href="#funcionamento">Conhecer o projeto</a>
+            <a class="button button-ghost" href="https://github.com/felipe-deev/StockFix" target="_blank" rel="noopener">Ver o código</a>
+          </div>
+        </div>
+
+        <figure class="drawing" aria-label="Desenho ilustrativo: uma caixa com 500 parafusos dividida em 10 pacotes de 20 e 300 unidades soltas">
+          <svg viewBox="0 0 520 400" role="img" aria-hidden="true">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" class="fill-line" />
+              </marker>
+              <marker id="tick" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M5,0 L5,10" class="stroke-dim" />
+              </marker>
+            </defs>
+
+            <!-- Caixa -->
+            <g class="draw">
+              <polygon points="40,130 95,90 285,90 230,130" />
+              <polygon points="230,130 285,90 285,250 230,290" />
+              <rect x="40" y="130" width="190" height="160" />
+              <line x1="40" y1="170" x2="230" y2="170" class="thin" />
+            </g>
+            <text x="135" y="156" class="label center">CX-500 · PARAFUSO</text>
+            <text x="135" y="236" class="big center">500</text>
+            <text x="135" y="262" class="label center">unidades</text>
+
+            <!-- Cota da caixa -->
+            <g class="dim">
+              <line x1="40" y1="300" x2="40" y2="330" />
+              <line x1="230" y1="300" x2="230" y2="330" />
+              <line x1="40" y1="322" x2="230" y2="322" marker-start="url(#tick)" marker-end="url(#tick)" />
+            </g>
+            <text x="135" y="346" class="label center dim-text">1 caixa = 500 un.</text>
+
+            <!-- Seta -->
+            <line x1="298" y1="190" x2="340" y2="190" class="draw-line" marker-end="url(#arrow)" />
+
+            <!-- Pacotinhos 2 × 5 -->
+            <g class="draw packs">
+              <rect x="356" y="70"  width="64" height="30" rx="3" /><rect x="432" y="70"  width="64" height="30" rx="3" />
+              <rect x="356" y="110" width="64" height="30" rx="3" /><rect x="432" y="110" width="64" height="30" rx="3" />
+              <rect x="356" y="150" width="64" height="30" rx="3" /><rect x="432" y="150" width="64" height="30" rx="3" />
+              <rect x="356" y="190" width="64" height="30" rx="3" /><rect x="432" y="190" width="64" height="30" rx="3" />
+              <rect x="356" y="230" width="64" height="30" rx="3" /><rect x="432" y="230" width="64" height="30" rx="3" />
+            </g>
+            <g class="label center">
+              <text x="388" y="90">20</text><text x="464" y="90">20</text>
+              <text x="388" y="130">20</text><text x="464" y="130">20</text>
+              <text x="388" y="170">20</text><text x="464" y="170">20</text>
+              <text x="388" y="210">20</text><text x="464" y="210">20</text>
+              <text x="388" y="250">20</text><text x="464" y="250">20</text>
+            </g>
+
+            <!-- Cota dos pacotes -->
+            <g class="dim">
+              <line x1="356" y1="272" x2="496" y2="272" marker-start="url(#tick)" marker-end="url(#tick)" />
+            </g>
+            <text x="426" y="294" class="label center dim-text">10 pacotes × 20 = 200</text>
+            <text x="426" y="324" class="label center">+ 300 soltas</text>
+          </svg>
+          <figcaption>Exemplo ilustrativo · um estoque, diferentes formas de vender</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Problema e fluxo -->
+    <section id="funcionamento" class="section">
+      <div class="wrap split">
+        <div>
+          <h2>Comprar em volume. Vender com controle.</h2>
+          <p class="intro">Quem compra caixas e revende em pequenas quantidades precisa saber quanto recebeu, quanto separou e quanto ainda pode vender. Anotações isoladas dificultam essa conferência.</p>
+          <p class="intro">O StockFix reúne essas operações em um único fluxo. O caso inicial é a revenda de parafusos, com categorias e campos adaptáveis a outros produtos.</p>
+        </div>
+
+        <ol class="flow">
+          <li>
+            <h3>Cadastre e organize</h3>
+            <p>Produtos, fotos, códigos, categorias, fornecedores e clientes formam a base da operação.</p>
+          </li>
+          <li>
+            <h3>Receba as compras</h3>
+            <p>Ao confirmar uma compra, o sistema atualiza o estoque e calcula o custo médio, incluindo o rateio do frete.</p>
+          </li>
+          <li>
+            <h3>Prepare o estoque</h3>
+            <p>Abra caixas, monte pacotinhos, confira quantidades e imprima etiquetas com códigos de barras.</p>
+          </li>
+          <li>
+            <h3>Venda e acompanhe</h3>
+            <p>Registre a venda, acompanhe o pedido até o envio e consulte valores, taxas, custos e lucro.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Simulação -->
+    <section class="section section-demo" aria-labelledby="demo-title">
+      <div class="wrap">
+        <h2 id="demo-title">Separar muda a embalagem. O total continua o mesmo.</h2>
+        <p class="intro">Nesta simulação, uma caixa contém 500 unidades e cada pacotinho recebe 20. Mova o controle para ver a distribuição antes de qualquer venda.</p>
+
+        <div class="demo">
+          <div class="demo-controls">
+            <label for="packs">Pacotinhos montados</label>
+            <div class="slider-row">
+              <input id="packs" type="range" min="0" max="25" value="10" step="1">
+              <output id="count" for="packs">10</output>
+            </div>
+
+            <dl class="numbers" aria-live="polite" aria-atomic="true">
+              <div>
+                <dt>Unidades soltas</dt>
+                <dd id="loose">300</dd>
+              </div>
+              <div>
+                <dt>Unidades embaladas</dt>
+                <dd id="packed">200</dd>
+              </div>
+            </dl>
+            <p id="summary" class="summary">10 pacotinhos de 20 unidades + 300 unidades soltas = 500 unidades.</p>
+            <p class="note">Demonstração local e ilustrativa. Não acessa o banco nem altera o estoque do sistema.</p>
+          </div>
+
+          <div class="demo-visual" aria-hidden="true">
+            <div class="pack-grid" id="pack-grid"></div>
+            <div class="split-bar"><span id="bar-packed"></span></div>
+            <div class="split-legend"><span>Embalado</span><span>Solto</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recursos -->
+    <section id="recursos" class="section">
+      <div class="wrap">
+        <h2>O dia a dia em uma visão conectada.</h2>
+        <div class="features">
+          <article class="feature">
+            <h3>Cadastros flexíveis</h3>
+            <p>Categorias com campos próprios, produtos com diferentes formas de venda e importação de planilhas com validação antes de gravar.</p>
+          </article>
+          <article class="feature">
+            <h3>Estoque rastreável</h3>
+            <p>Histórico de movimentações, conferência por leitor em modo teclado e recusa de operações que deixariam o saldo negativo.</p>
+          </article>
+          <article class="feature">
+            <h3>Operação comercial</h3>
+            <p>Compras, reposição, vendas manuais, pedidos, cancelamentos e devoluções com reposição dos itens que realmente retornaram.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tecnologia -->
+    <section id="tecnologia" class="section">
+      <div class="wrap">
+        <h2>Interfaces separadas. Regras de negócio compartilhadas.</h2>
+        <p class="intro">Um monorepo em TypeScript reúne o painel web, a estrutura do aplicativo móvel, os cálculos e as migrações do banco. npm workspaces e Turborepo organizam os pacotes e as tarefas.</p>
+
+        <div class="stack">
+          <article>
+            <h3>Next.js 16 + React</h3>
+            <p>Painel web com App Router, Tailwind CSS 4 e temas claro e escuro.</p>
+          </article>
+          <article>
+            <h3>Supabase + PostgreSQL</h3>
+            <p>Banco de dados e autenticação. Políticas RLS restringem o acesso por empresa e perfil de usuário.</p>
+          </article>
+          <article>
+            <h3>Expo + React Native</h3>
+            <p>Base do aplicativo Android e iOS, em desenvolvimento e com evolução independente das telas web.</p>
+          </article>
+          <article>
+            <h3>TypeScript + testes automatizados</h3>
+            <p>Regras de estoque e cálculos no pacote core. Vitest, Testing Library, Jest e PGlite cobrem diferentes partes do projeto.</p>
+          </article>
+        </div>
+        <p class="note">Os testes de banco usam PostgreSQL embutido com PGlite. Esta apresentação descreve a estrutura do projeto; não representa uma nova execução da suíte de testes.</p>
+      </div>
+    </section>
+
+    <!-- Evolução -->
+    <section class="section">
+      <div class="wrap">
+        <h2>O que existe e o que vem depois.</h2>
+        <div class="status">
+          <article class="status-card">
+            <span class="badge">Versão atual · Etapa 5</span>
+            <h3>Gestão da operação</h3>
+            <ul>
+              <li>Login e acesso por empresa.</li>
+              <li>Cadastros, compras e estoque.</li>
+              <li>Etiquetas e conferência de produtos.</li>
+              <li>Vendas, pedidos e devoluções.</li>
+              <li>Avisos de estoque baixo e pedidos atrasados.</li>
+            </ul>
+          </article>
+          <article class="status-card status-future">
+            <span class="badge">Planejamento</span>
+            <h3>Expansão por etapas</h3>
+            <ul>
+              <li>Emissão de notas fiscais.</li>
+              <li>Integrações automáticas com Mercado Livre, Shopee e TikTok Shop.</li>
+              <li>Módulos adicionais sinalizados como “em breve”.</li>
+              <li>Evolução do aplicativo móvel, que ainda não reúne todas as funções do painel.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fechamento -->
+    <section class="closing-wrap">
+      <div class="wrap">
+        <div class="closing">
+          <div>
+            <h2>Explore o StockFix.</h2>
+            <p>Veja o código, a organização do projeto e as instruções para instalar, configurar o Supabase e rodar o painel localmente.</p>
+          </div>
+          <a class="button button-light" href="https://github.com/felipe-deev/StockFix" target="_blank" rel="noopener">Ver repositório no GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé em formato de carimbo de desenho técnico -->
+  <footer class="wrap">
+    <table class="title-block">
+      <caption class="visually-hidden">Dados da apresentação</caption>
+      <tr>
+        <th scope="row">Projeto</th><td>StockFix</td>
+        <th scope="row">Documento</th><td>Portfólio do projeto</td>
+      </tr>
+      <tr>
+        <th scope="row">Tipo</th><td>Apresentação independente</td>
+        <th scope="row">Data</th><td>Novembro de 2026</td>
+      </tr>
+    </table>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
