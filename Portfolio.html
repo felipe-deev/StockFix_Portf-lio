@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>StockFix — Portfólio do projeto</title>
   <meta name="description" content="StockFix: ERP para compras, estoque e vendas de pequenas empresas, com painel web em Next.js, Supabase e aplicativo móvel em Expo.">
-  <meta name="theme-color" content="#0b3a2f">
+  <meta name="theme-color" content="#ffffff">
+  <script>
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('intro-pending');
+      window.setTimeout(() => document.documentElement.classList.remove('intro-pending'), 3000);
+    }
+    try {
+      if (localStorage.getItem('stockfix-portfolio-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+        document.querySelector('meta[name="theme-color"]').content = '#111315';
+      }
+    } catch {}
+  </script>
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,13 +39,14 @@
       </a>
       <div class="nav-links">
         <a href="#painel">O painel</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Ativar tema escuro" aria-pressed="false">
+          <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.5 14a8.5 8.5 0 0 1-10.5-10.5A8.5 8.5 0 1 0 20.5 14Z"/></svg>
+          <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+          <span>Tema escuro</span>
+        </button>
         <a href="#funcionamento">Como funciona</a>
-        <a href="#tecnologia">Tecnologia</a>
-        <a href="#etapas">Etapas</a>
-        <a class="nav-cta" href="https://github.com/felipe-deev/StockFix" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
-          GitHub
-        </a>
+        <a href="#demonstracao">Experimentar</a>
+        <a href="#recursos">Recursos</a>
       </div>
     </nav>
   </header>
@@ -43,17 +56,16 @@
     <!-- ============ Hero ============ -->
     <section class="hero">
       <div class="wrap hero-head">
-        <p class="kicker"><span class="pulse" aria-hidden="true"></span>Em desenvolvimento · Etapa 5 de 11</p>
-        <h1>Da caixa fechada à venda organizada.</h1>
-        <p class="lead">ERP para pequenas empresas que compram em volume e vendem em partes. Compras, estoque e vendas no mesmo fluxo, com controle por unidade, caixa e pacotinho.</p>
-        <div class="hero-actions">
-          <a class="button" href="#painel">Ver o painel</a>
-          <a class="button button-ghost" href="https://github.com/felipe-deev/StockFix" target="_blank" rel="noopener">Ver o código no GitHub</a>
-        </div>
+        <p class="kicker"><span class="pulse" aria-hidden="true"></span>Gestão de estoque · Em desenvolvimento</p>
+        <h1>Comprou em caixas. Vendeu em partes. <em>Estoque sob controle.</em></h1>
+        <p class="lead">Para quem compra no atacado e revende em pequenas quantidades. Acompanhe o que entrou, o que foi separado e o que ainda pode vender, em um só lugar.</p>
       </div>
 
       <!-- Prévia do painel (HTML, dados de exemplo) -->
-      <div class="wrap">
+      <div class="wrap product-stage">
+        <div class="stage-toolbar">
+          <span>Uma visão clara do que você tem para vender.</span>
+        </div>
         <figure class="app-preview" id="painel" aria-label="Prévia ilustrativa da tela Saldo de estoque do painel StockFix">
           <div class="browser-bar" aria-hidden="true">
             <span></span><span></span><span></span>
@@ -109,23 +121,32 @@
             </div>
           </div>
 
-          <!-- Cotas técnicas sobre a tela -->
-          <div class="callouts" aria-hidden="true">
-            <span class="callout c1">Menu por área</span>
-            <span class="callout c2">Soltas, pacotes e caixas</span>
-          </div>
-
           <figcaption>Prévia ilustrativa com dados de exemplo, baseada no menu e nas telas reais do painel.</figcaption>
         </figure>
       </div>
     </section>
 
+    <aside class="wrap portfolio-guide" aria-label="Guia do portfólio">
+      <details class="portfolio-details">
+        <summary>Como explorar este portfólio<span>Conheça o projeto, experimente o fluxo e encontre os canais de contato.</span></summary>
+        <div class="disclosure-body">
+          <p>Este portfólio apresenta o StockFix, um sistema de compras, estoque e vendas em desenvolvimento. A prévia do painel é ilustrativa e utiliza dados de exemplo.</p>
+          <ol class="guide-steps">
+            <li><strong>Conheça a operação.</strong> Veja em <a href="#funcionamento">Como funciona</a> o caminho da mercadoria, da compra ao envio do pedido.</li>
+            <li><strong>Experimente sem compromisso.</strong> Na <a href="#demonstracao">demonstração interativa</a>, receba uma caixa, monte pacotinhos e simule uma venda. Os saldos mudam na tela, sem acessar dados reais. Você pode ajustar as quantidades e recomeçar.</li>
+            <li><strong>Explore os detalhes.</strong> Consulte os <a href="#recursos">recursos</a> e abra as seções de <a href="#tecnologia">tecnologia</a> e <a href="#etapas">evolução</a> para distinguir o que já foi entregue do que está planejado.</li>
+            <li><strong>Escolha o tema e entre em contato.</strong> Use o botão no topo para alternar entre claro e escuro. Ao final, os <a href="#contato">cartões de contato</a> abrem uma nova mensagem de e-mail ou o perfil no LinkedIn.</li>
+          </ol>
+        </div>
+      </details>
+    </aside>
+
     <!-- ============ Problema + fluxo ============ -->
     <section id="funcionamento" class="section">
       <div class="wrap">
         <div class="section-head">
-          <h2>Comprar em volume. Vender com controle.</h2>
-          <p class="intro">Quem compra caixas e revende em pequenas quantidades precisa saber quanto recebeu, quanto separou e quanto ainda pode vender. O StockFix reúne essas operações em um único fluxo. O caso inicial é a revenda de parafusos, com categorias e campos adaptáveis a outros produtos.</p>
+          <h2>Da compra ao pedido, sem perder o saldo de vista.</h2>
+          <p class="intro">O StockFix conecta compras, estoque e vendas. Veja o caminho de uma mercadoria: do recebimento em caixas à saída em unidades ou pacotinhos.</p>
         </div>
 
         <ol class="flow">
@@ -153,60 +174,70 @@
       </div>
     </section>
 
-    <!-- ============ Simulação ============ -->
-    <section class="section section-dark" aria-labelledby="demo-title">
+    <!-- ============ Demonstração guiada ============ -->
+    <section id="demonstracao" class="section" aria-labelledby="demo-title">
       <div class="wrap demo">
         <div class="demo-text">
-          <h2 id="demo-title">Separar muda a embalagem. O total continua o mesmo.</h2>
-          <p class="intro">Uma caixa chega com 500 parafusos. Cada pacotinho leva 20. Arraste o controle e veja o saldo se redistribuir sem perder nenhuma unidade.</p>
-
-          <label for="packs">Pacotinhos montados</label>
-          <div class="slider-row">
-            <input id="packs" type="range" min="0" max="25" value="10" step="1">
-            <output id="count" for="packs">10</output>
+          <p class="eyebrow">Experimente na prática</p>
+          <h2 id="demo-title">Uma caixa. Três ações. O saldo sempre à vista.</h2>
+          <p class="intro">Receba 500 parafusos, separe pacotinhos de 20 e simule uma venda. Veja o estoque acompanhar cada movimento.</p>
+          <div class="demo-actions" id="demo-actions" hidden>
+            <button type="button" class="demo-action" id="receive-box"><span>1</span>Receber uma caixa</button>
+            <button type="button" class="demo-action" id="make-packs" disabled><span>2</span>Montar 10 pacotinhos</button>
+            <button type="button" class="demo-action" id="sell-packs" disabled><span>3</span>Vender 5 pacotinhos</button>
           </div>
-
-          <dl class="numbers" aria-live="polite" aria-atomic="true">
-            <div><dt>Soltas</dt><dd id="loose">300</dd></div>
-            <div><dt>Embaladas</dt><dd id="packed">200</dd></div>
-            <div><dt>Total</dt><dd>500</dd></div>
-          </dl>
-          <p id="summary" class="summary">10 pacotinhos de 20 unidades + 300 unidades soltas = 500 unidades.</p>
-          <p class="note">Simulação local. Não acessa o banco nem altera o estoque do sistema.</p>
+          <noscript><p>Ative o JavaScript para experimentar a demonstração interativa.</p></noscript>
+          <label for="packs">Ajuste a quantidade de pacotinhos</label>
+          <div class="slider-row">
+            <input id="packs" type="range" min="0" max="25" value="0" step="1" disabled>
+            <output id="count" for="packs">0</output>
+          </div>
+          <p id="summary" class="demo-status" role="status" aria-live="polite" aria-atomic="true">Comece recebendo uma caixa de 500 unidades.</p>
+          <button class="reset-demo" id="reset-demo" type="button" hidden>Recomeçar demonstração</button>
+          <p class="note">Exemplo interativo com dados fictícios. Não acessa o banco nem altera o estoque real.</p>
         </div>
-
-        <div class="demo-visual" aria-hidden="true">
-          <div class="box-label"><span>CX-500 · Parafuso sextavado M6 × 20</span><span>500 un.</span></div>
-          <div class="pack-grid" id="pack-grid"></div>
-          <div class="split-bar"><span id="bar-packed"></span></div>
-          <div class="split-legend"><span><i class="dot dot-packed"></i>Embalado</span><span><i class="dot dot-loose"></i>Solto</span></div>
+        <div class="demo-visual">
+          <div class="box-label"><span>Parafuso sextavado M6 × 20</span><span>20 un. por pacote</span></div>
+          <dl class="demo-ledger">
+            <div><dt>Unidades recebidas</dt><dd id="received">0</dd></div>
+            <div><dt>Unidades vendidas</dt><dd id="sold">0</dd></div>
+          </dl>
+          <dl class="numbers">
+            <div><dt>Soltas</dt><dd id="loose">0</dd></div>
+            <div><dt>Embaladas</dt><dd id="packed">0</dd></div>
+            <div><dt>Em estoque</dt><dd id="available">0</dd></div>
+          </dl>
+          <div class="pack-grid" id="pack-grid" aria-hidden="true"></div>
+          <div class="split-bar" aria-hidden="true"><span id="bar-packed"></span></div>
+          <div class="split-legend"><span><i class="dot dot-packed"></i>Pacotinhos em estoque</span><span><i class="dot dot-loose"></i>Capacidade livre ou vendida</span></div>
+          <p class="balance-note" id="balance">Recebidas 0 = em estoque 0 + vendidas 0.</p>
         </div>
       </div>
     </section>
 
     <!-- ============ Recursos ============ -->
-    <section class="section">
+    <section class="section" id="recursos">
       <div class="wrap">
         <div class="section-head">
-          <h2>O dia a dia em uma visão conectada.</h2>
-          <p class="intro">Cada operação deixa rastro. O saldo nunca fica negativo, e cada entrada, saída e ajuste aparece no histórico.</p>
+          <h2>Menos dúvida na hora de decidir.</h2>
+          <p class="intro">Saiba o que está disponível, encontre o histórico de cada movimento e acompanhe o pedido até o envio.</p>
         </div>
 
         <div class="features">
           <article class="feature">
-            <h3>Cadastros flexíveis</h3>
+            <h3>Encontre o produto certo</h3>
             <p>Categorias com campos próprios, produtos com diferentes formas de venda e importação de planilhas com validação antes de gravar.</p>
           </article>
           <article class="feature">
-            <h3>Estoque rastreável</h3>
+            <h3>Entenda cada mudança no saldo</h3>
             <p>Histórico de movimentações, conferência por leitor em modo teclado e recusa de operações que deixariam o saldo negativo.</p>
           </article>
           <article class="feature">
-            <h3>Operação comercial</h3>
+            <h3>Acompanhe compras e pedidos</h3>
             <p>Compras, reposição, vendas manuais, pedidos, cancelamentos e devoluções com reposição dos itens que realmente retornaram.</p>
           </article>
           <article class="feature">
-            <h3>Acesso por empresa</h3>
+            <h3>Organize o acesso da equipe</h3>
             <p>Perfis Dono, Funcionário e Contador. Cada usuário enxerga apenas os dados da própria empresa, e sem login nada é acessível.</p>
           </article>
         </div>
@@ -215,7 +246,10 @@
 
     <!-- ============ Tecnologia ============ -->
     <section id="tecnologia" class="section section-tint">
-      <div class="wrap tech">
+      <div class="wrap">
+        <details class="portfolio-details">
+          <summary>Detalhes técnicos <span>Arquitetura, tecnologias e testes</span></summary>
+          <div class="tech disclosure-body">
         <div>
           <h2>Interfaces separadas. Regras de negócio compartilhadas.</h2>
           <p class="intro">Um monorepo em TypeScript reúne o painel web, o aplicativo móvel, os cálculos e as migrações do banco. npm workspaces e Turborepo organizam os pacotes e as tarefas.</p>
@@ -242,15 +276,20 @@
 └─ tests/          <i>PGlite</i>
 turbo.json</code></pre>
         </figure>
+          </div>
+        </details>
       </div>
     </section>
 
     <!-- ============ Etapas ============ -->
     <section id="etapas" class="section">
       <div class="wrap">
+        <details class="portfolio-details">
+          <summary>Evolução do StockFix <span>O que já foi entregue e os próximos passos</span></summary>
+          <div class="disclosure-body">
         <div class="section-head">
-          <h2>Construído por etapas.</h2>
-          <p class="intro">Cada etapa entrega um bloco completo, com migração própria no banco. As próximas já aparecem no menu do painel marcadas como “em breve”.</p>
+          <h2>O que já faz parte do projeto.</h2>
+          <p class="intro">Acesso, cadastros, estoque, compras e vendas compõem as etapas entregues. Os itens abaixo marcados como planejamento ainda não estão disponíveis.</p>
         </div>
 
         <ol class="timeline">
@@ -259,6 +298,9 @@ turbo.json</code></pre>
           <li class="done"><span class="t-num">3</span><h3>Estoque</h3><p>Saldo, movimentações, conferência e etiquetas.</p></li>
           <li class="done"><span class="t-num">4</span><h3>Compras</h3><p>Recebimento, custo médio e rateio de frete.</p></li>
           <li class="done current"><span class="t-num">5</span><h3>Vendas</h3><p>Pedidos por etapa, devoluções e avisos em tempo real.</p><em>Versão atual</em></li>
+        </ol>
+        <h3 class="planned-title">Em planejamento</h3>
+        <ol class="timeline planned">
           <li><span class="t-num">6</span><h3>Relatórios</h3><p>Vendas, faturamento e fechamento mensal.</p></li>
           <li><span class="t-num">8</span><h3>Integrações</h3><p>Mercado Livre, Shopee e TikTok Shop.</p></li>
           <li><span class="t-num">9</span><h3>Notas fiscais</h3><p>Emissão de NF-e, XML e DANFE.</p></li>
@@ -266,18 +308,27 @@ turbo.json</code></pre>
           <li><span class="t-num">11</span><h3>Backup</h3><p>Cópia diária em nuvem e restauração.</p></li>
         </ol>
         <p class="note">Etapas 6 em diante são planejamento e ainda não estão disponíveis. O aplicativo móvel ainda não reúne todas as funções do painel.</p>
+          </div>
+        </details>
       </div>
     </section>
-
-    <!-- ============ Fechamento ============ -->
-    <section class="closing-wrap">
-      <div class="wrap">
-        <div class="closing">
-          <div>
-            <h2>Explore o código do StockFix.</h2>
-            <p>O repositório traz a organização do projeto e as instruções para instalar, configurar o Supabase e rodar o painel localmente.</p>
-          </div>
-          <a class="button" href="https://github.com/felipe-deev/StockFix" target="_blank" rel="noopener">Abrir repositório no GitHub</a>
+    <section id="contato" class="section closing-section" aria-labelledby="closing-title">
+      <div class="wrap closing-content">
+        <div>
+          <p class="eyebrow">Fale com Felipe</p>
+          <h2 id="closing-title">Vamos conversar sobre o StockFix?</h2>
+          <p class="intro">Quer conhecer melhor o projeto ou conversar sobre uma oportunidade? Entre em contato por e-mail ou pelo LinkedIn.</p>
+        </div>
+        <div class="contact-links" aria-label="Canais de contato">
+          <a class="contact-card" href="mailto:felipe.borges.deev@gmail.com">
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span>
+            <span class="contact-copy"><strong>Enviar e-mail</strong><span>felipe.borges.deev@gmail.com</span></span>
+          </a>
+          <a class="contact-card" href="https://www.linkedin.com/in/felipe-lima-8b131640b/" target="_blank" rel="noopener noreferrer">
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7m4 0v-7m0 3a3 3 0 0 1 6 0v4"/><circle cx="8" cy="7" r=".8" fill="currentColor" stroke="none"/></svg></span>
+            <span class="contact-copy"><strong>Conectar no LinkedIn</strong><span>Conheça meu perfil profissional</span></span>
+            <span class="sr-only"> (abre em nova aba)</span>
+          </a>
         </div>
       </div>
     </section>
@@ -290,7 +341,6 @@ turbo.json</code></pre>
         <span class="brand-name">Stock<span>Fix</span></span>
       </a>
       <p>Portfólio do projeto · Novembro de 2026</p>
-      <a href="https://github.com/felipe-deev/StockFix" target="_blank" rel="noopener">github.com/felipe-deev/StockFix</a>
     </div>
   </footer>
 
