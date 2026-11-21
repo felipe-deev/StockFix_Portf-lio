@@ -107,7 +107,7 @@ function createParticleCells(width, height, limit = 96) {
     return {
       x: (i % cols + .5) * cw, y: (Math.floor(i / cols) + .5) * ch,
       radius: Math.hypot(cw, ch) / 2 + 1,
-      delay: seed * .38,
+      delay: ((i % cols) % 2 + 2 * (Math.floor(i / cols) % 2)) * .1,
       dx: Math.sin(i * 12.7) * 150,
       dy: 45 + Math.cos(i * 5.3) * 120,
       size: 1.4 + seed * 2.4
@@ -119,18 +119,22 @@ function particleProgress(progress, delay) {
   return Math.max(0, Math.min(1, (progress - delay) / .62));
 }
 
-function particleMask(width, height, cells, progress) {
-  const dots = cells.map(cell => {
-    const p = particleProgress(progress, cell.delay);
-    const radius = cell.radius * (1 - Math.pow(1 - p, 3));
-    return `<circle cx="${cell.x.toFixed(1)}" cy="${cell.y.toFixed(1)}" r="${radius.toFixed(1)}" fill="white"/>`;
-  }).join('');
-  return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">${dots}</svg>`)}")`;
+// Gradientes estáveis: evita decodificar uma nova imagem SVG a cada quadro.
+function particleMask(width, height, cells) {
+  const cw = cells[0].x * 2;
+  const ch = cells[0].y * 2;
+  const layers = Array.from({ length: 4 }, (_, i) => {
+    const x = cw * (i % 2 + .5);
+    const y = ch * (Math.floor(i / 2) + .5);
+    return `radial-gradient(circle at ${x}px ${y}px, #000 var(--particle-r${i}, 0px), transparent calc(var(--particle-r${i}, 0px) + .5px))`;
+  });
+  return { image: layers.join(', '), size: `${cw * 2}px ${ch * 2}px` };
 }
 
 function setupEntrance() {
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const root = document.documentElement;
+  const mobile = window.matchMedia('(max-width: 760px), (pointer: coarse)').matches;
   if (motion.matches || !('IntersectionObserver' in window) ||
       !CSS.supports('mask-image', 'linear-gradient(black, black)')) {
     root.classList.remove('intro-pending');
@@ -151,11 +155,15 @@ function setupEntrance() {
   let stopped = false;
   let previousPaint = -Infinity;
   let scale;
+  let viewportWidth = window.innerWidth;
 
   function show(element) {
     element.classList.remove('particle-wait');
     element.style.removeProperty('mask-image');
     element.style.removeProperty('-webkit-mask-image');
+    element.style.removeProperty('mask-size');
+    element.style.removeProperty('-webkit-mask-size');
+    for (let i = 0; i < 4; i++) element.style.removeProperty(`--particle-r${i}`);
     active.delete(element);
   }
   function resize() {
@@ -163,8 +171,9 @@ function setupEntrance() {
     canvas.width = Math.round(window.innerWidth * scale);
     canvas.height = Math.round(window.innerHeight * scale);
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
-    // Ao redimensionar, remove máscaras calculadas para o tamanho anterior.
-    active.forEach((_, element) => show(element));
+    // A barra de endereço móvel altera só a altura: não reinicia a revelação.
+    if (window.innerWidth !== viewportWidth) active.forEach((_, element) => show(element));
+    viewportWidth = window.innerWidth;
   }
   function draw(now) {
     frame = 0;
@@ -180,9 +189,11 @@ function setupEntrance() {
           return;
         }
         if (paintMask) {
-          const mask = particleMask(animation.width, animation.height, animation.cells, progress);
-          element.style.maskImage = mask;
-          element.style.webkitMaskImage = mask;
+          for (let i = 0; i < 4; i++) {
+            const p = particleProgress(progress, i * .1);
+            const radius = animation.cells[0].radius * (1 - Math.pow(1 - p, 3));
+            element.style.setProperty(`--particle-r${i}`, `${radius.toFixed(2)}px`);
+          }
         }
         ctx.fillStyle = animation.color;
         animation.cells.forEach(cell => {
@@ -213,9 +224,11 @@ function setupEntrance() {
     const width = Math.ceil(rect.width);
     const height = Math.ceil(rect.height);
     const cells = createParticleCells(width, height, window.innerWidth < 760 ? 64 : 96);
-    const mask = particleMask(width, height, cells, 0);
-    element.style.maskImage = mask;
-    element.style.webkitMaskImage = mask;
+    const mask = particleMask(width, height, cells);
+    element.style.maskImage = mask.image;
+    element.style.webkitMaskImage = mask.image;
+    element.style.maskSize = mask.size;
+    element.style.webkitMaskSize = mask.size;
     element.classList.remove('particle-wait');
     active.set(element, {
       start: performance.now(), width, height, cells,
@@ -242,6 +255,9 @@ function setupEntrance() {
   }
   resize();
   targets.forEach(element => {
+    const rect = element.getBoundingClientRect();
+    // No celular, não esconde o conteúdo que já apareceu no primeiro desenho.
+    if (mobile && rect.top < window.innerHeight && rect.bottom > 0) return;
     element.classList.add('particle-wait');
     observer.observe(element);
   });
